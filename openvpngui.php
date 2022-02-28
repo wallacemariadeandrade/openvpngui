@@ -5,17 +5,17 @@
     <body>
         <div class="container">
             <h1>OpenVPN GUI Linux</h1>
-            <form action="import-profile.php" method="POST" enctype="multipart/form-data">
-                <label for="import-profile">Importar profile</label>
-                <input type="file" id="import-profile" name="profile" accept=".ovpn"/>
+            <form action="import-files.php" method="POST" enctype="multipart/form-data">
+                <label for="import-file">Importar arquivo</label>
+                <input type="file" id="import-file" name="file"/>
                 <button type="submit">Enviar</button>
             </form>
             
-            <h2>Perfis importados:</h2>
+            <h2>Arquivos importados:</h2>
             <?php 
-                $profiles = array_diff(scandir(getcwd()."/"."profiles/"), array('..', '.'));
-                foreach ($profiles as $profile) {
-                    print $profile;
+                $files = array_diff(scandir(getcwd()."/"."files/"), array('..', '.'));
+                foreach ($files as $file) {
+                    print $file;
                     print "<br/>";
                 }
             ?>
@@ -25,9 +25,11 @@
                 <label for="selected-profile">Profile:</label>
                 <select id="selected-profile" name="selected-profile">
                     <?php 
-                        foreach ($profiles as $profile) {
-                            print $profile;
-                            print "<option value='$profile'>$profile</option>";
+                        foreach ($files as $file) {
+                            if(strpos($file, '.ovpn') !== false){
+                                print $file;
+                                print "<option value='$file'>$file</option>";
+                            }
                         }
                     ?>
                 </select>

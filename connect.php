@@ -9,7 +9,7 @@
 
             if(isset($_POST['selected-profile'])){
                 echo "<pre>"; 
-                echo shell_exec("openvpn3 session-start --config ".getcwd()."/"."profiles/".$_POST['selected-profile']);
+                echo shell_exec("openvpn3 session-start --config ".getcwd()."/"."files/".$_POST['selected-profile']);
                 echo "</pre>";
             } else {
                 print "Ocorreu um erro ao conectar. Tente novamente depois.";
