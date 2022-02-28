@@ -20,6 +20,27 @@
                 }
             ?>
 
+            <h2>Conectar</h2>
+            <form action="connect.php" method="POST">
+                <label for="selected-profile">Profile:</label>
+                <select id="selected-profile" name="selected-profile">
+                    <?php 
+                        foreach ($profiles as $profile) {
+                            print $profile;
+                            print "<option value='$profile'>$profile</option>";
+                        }
+                    ?>
+                </select>
+                <button type="submit">Conectar</button>
+            </form>
+
+            <h2>Status</h2>
+            <div>
+                <?php
+                    echo "<pre>".shell_exec("openvpn3 sessions-list")."</pre>";
+                ?>
+            </div>
+            
             <?php
                 include "footer.php";
             ?>

@@ -15,7 +15,7 @@
             }
         }
         ?>
-        <a href="index.php">Retornar</a>
+        <a href="openvpngui.php">Retornar</a>
         <?php
             include "footer.php";
         ?>
