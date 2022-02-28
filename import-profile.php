@@ -16,6 +16,9 @@
         }
         ?>
         <a href="index.php">Retornar</a>
+        <?php
+            include "footer.php";
+        ?>
     </div>
 </body>
 </html>
