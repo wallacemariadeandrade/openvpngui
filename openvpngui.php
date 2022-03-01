@@ -39,9 +39,17 @@
             <h2>Status</h2>
             <div>
                 <?php
-                    echo "<pre>".shell_exec("openvpn3 sessions-list")."</pre>";
+                    $sessions = shell_exec("openvpn3 sessions-list");
+                    echo "<pre>".$sessions."</pre>";
                 ?>
             </div>
+
+            <h2>Desconectar</h2>
+            <form action="disconnect.php" method="POST">
+                <label for="session-path">Session path:</label>
+                <input type="text" id="session-path" name="session-path" />
+                <button type="submit">Desconectar</button>
+            </form>
             
             <?php
                 include "footer.php";
