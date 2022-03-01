@@ -41,6 +41,8 @@
                 <?php
                     $sessions = shell_exec("openvpn3 sessions-list");
                     echo "<pre>".$sessions."</pre>";
+                    $route6 = shell_exec("ip -6 route | grep 2000");
+                    echo "<pre>".$route6."</pre>";
                 ?>
             </div>
 
@@ -51,6 +53,17 @@
                 <button type="submit">Desconectar</button>
             </form>
             
+            <h2>
+                Rota IPv6 2000::/3
+                <br/>
+                <small>(só aplique se tiver IPv6 configurado na VPN e não tiver recebido a rota default automaticamente)</small>
+            </h2>
+            <form action="route6.php" method="POST">
+                <label for="tun">Nome da interface tun da VPN:</label>
+                <input type="text" id="tun" name="tun" />
+                <button type="submit">Aplicar</button>
+            </form>
+
             <?php
                 include "footer.php";
             ?>
