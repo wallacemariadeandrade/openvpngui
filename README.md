@@ -5,7 +5,8 @@ Interface web para interação com o cliente openvpn3 disponível no Linux
 1) Instale o cliente openvpn3 [aqui](https://openvpn.net/cloud-docs/openvpn-3-client-for-linux/).
 2) Instale o PHP com ```sudo apt update && sudo apt install php```.
 3) Clone ou baixe este repositório para o diretório ```/var/www/html/``` no seu Linux. A pasta ```openvpngui``` deverá ficar dentro de ```/var/www/html/```. CASO VOCÊ BAIXE O REPOSITÓRIO DIRETAMENTE, PRECISARÁ RENOMEAR A PASTA PARA O NOME CORRETO!
-4) Abra o arquivo do serviço com ```sudo nano /etc/systemd/system/openvpngui.service``` e copie o conteúdo abaixo para dentro dele. Salve-o em seguida.
+5) Crie a pasta ```files``` dentro de ```/var/www/html/openvpngui/```
+6) Abra o arquivo do serviço com ```sudo nano /etc/systemd/system/openvpngui.service``` e copie o conteúdo abaixo para dentro dele. Salve-o em seguida.
 ```
 [Unit]
 Description=OpenVPN GUI Linux - Wallace Andrade © 2022. Please see https://github.com/wallacemariadeandrade/openvpngui
@@ -21,9 +22,9 @@ User=root
 [Install]
 WantedBy=multi-user.target
 ```
-5) Habilite o serviço com ```sudo systemctl enable openvpngui.service```.
-6) Inicie o serviço com ```sudo systemctl start openvpngui.service```.
-7) Confirme se o serviço foi inicializado corretamente com ```sudo systemctl status openvpngui.service```. Você deverá ver algo similiar ao output abaixo.
+7) Habilite o serviço com ```sudo systemctl enable openvpngui.service```.
+8) Inicie o serviço com ```sudo systemctl start openvpngui.service```.
+9) Confirme se o serviço foi inicializado corretamente com ```sudo systemctl status openvpngui.service```. Você deverá ver algo similiar ao output abaixo.
 ```
 ● openvpngui.service - OpenVPN GUI Linux - Wallace Andrade © 2022
      Loaded: loaded (/etc/systemd/system/openvpngui.service; enabled; vendor preset: enabled)
@@ -45,7 +46,7 @@ mar 01 06:45:11 jarvisk2 openvpngui[10366]: [Tue Mar  1 06:45:11 2022] 127.0.0.1
 mar 01 06:45:11 jarvisk2 openvpngui[10366]: [Tue Mar  1 06:45:11 2022] 127.0.0.1:52434 [200]: GET /style.css
 mar 01 06:45:11 jarvisk2 openvpngui[10366]: [Tue Mar  1 06:45:11 2022] 127.0.0.1:52434 Closing
 ```
-8) Se tudo deu certo até aqui, você já poderá acessar a interface web na url ```localhost:8080/openvpngui.php```.
+10) Se tudo deu certo até aqui, você já poderá acessar a interface web na url ```localhost:8080/openvpngui.php```.
 
 ## utilização
 
