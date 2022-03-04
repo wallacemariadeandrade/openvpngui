@@ -4,7 +4,7 @@ Interface web para interação com o cliente openvpn3 disponível no Linux
 ## instalação
 1) Instale o cliente openvpn3 [aqui](https://openvpn.net/cloud-docs/openvpn-3-client-for-linux/).
 2) Instale o PHP com ```sudo apt update && sudo apt install php```.
-3) Clone ou baixe este repositório para o diretório ```/var/www/html/``` no seu Linux. A pasta ```openvpngui``` deverá ficar dentro de ```/var/www/html/```.
+3) Clone ou baixe este repositório para o diretório ```/var/www/html/``` no seu Linux. A pasta ```openvpngui``` deverá ficar dentro de ```/var/www/html/```. CASO VOCÊ BAIXE O REPOSITÓRIO DIRETAMENTE, PRECISARÁ RENOMEAR A PASTA PARA O NOME CORRETO!
 4) Abra o arquivo do serviço com ```sudo nano /etc/systemd/system/openvpngui.service``` e copie o conteúdo abaixo para dentro dele. Salve-o em seguida.
 ```
 [Unit]
@@ -23,7 +23,7 @@ WantedBy=multi-user.target
 ```
 5) Habilite o serviço com ```sudo systemctl enable openvpngui.service```.
 6) Inicie o serviço com ```sudo systemctl start openvpngui.service```.
-7) Confirme se o serviço foi inicializado corretamente com ```sudo systemctl enable openvpngui.service```. Você deverá ver algo similiar ao output abaixo.
+7) Confirme se o serviço foi inicializado corretamente com ```sudo systemctl status openvpngui.service```. Você deverá ver algo similiar ao output abaixo.
 ```
 ● openvpngui.service - OpenVPN GUI Linux - Wallace Andrade © 2022
      Loaded: loaded (/etc/systemd/system/openvpngui.service; enabled; vendor preset: enabled)
@@ -50,8 +50,19 @@ mar 01 06:45:11 jarvisk2 openvpngui[10366]: [Tue Mar  1 06:45:11 2022] 127.0.0.1
 ## utilização
 
 1) Importe os arquivos necessários à conexão para dentro da aplicação via botão de import. Geralmente são necessários os arquivos de certificado do usuário e servidor (.crt), chaves privadas do usuário (.key) e o profile OpenVPN (.ovpn).
-2) Escolha o profile desejado e clique em "Conectar". Uma nova página será aberta mostrando o output do cliente openvpn3, o qual também passará a ser mostrado na home page.
-3) Para desconectar, copie o path da sessão desejada, cole no campo "Session path" e clique em "Desconectar". Uma nova página irá mostrar as estatísticas da sessão encerrada.
+2) Edite o arquivo .ovpn ajustando a diretiva dos arquivos .crt e .key para ```/var/www/html/openvpngui/files/[arquivo]```. Exemplo:
+```
+...
+
+ca /var/www/html/openvpngui/files/ca.crt
+cert /var/www/html/openvpngui/files/wallace.crt
+key /var/www/html/openvpngui/files/wallace.key
+ta /var/www/html/openvpngui/files/ta.key
+...
+
+```
+3) Escolha o profile desejado e clique em "Conectar". Uma nova página será aberta mostrando o output do cliente openvpn3, o qual também passará a ser mostrado na home page.
+4) Para desconectar, copie o path da sessão desejada, cole no campo "Session path" e clique em "Desconectar". Uma nova página irá mostrar as estatísticas da sessão encerrada.
 
 ### rota IPv6
 Aparentemente existe um problema com a entrega da rota default IPv6 através da VPN quando em sistemas Linux. Para contornar isso a ferramenta ofereçe a opção de atribuição manual, bastando inserir o nome da interface túnel criada pela VPN e clicando em "Aplicar". Uma rota para 2000::/3 será inserida apontando para a interface túnel informada.
